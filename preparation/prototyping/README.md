@@ -1,0 +1,1 @@
+Der Protyp für die UI wurde mit Figma erstellet (www.figma.com). Die Datei (cloud_storage_app.fig) kann dort importiert werden. Dieser Prototyp enthält einige Features, welche in der Endversion (sehrwahrscheinlich) nicht Bestandteil sein werden.

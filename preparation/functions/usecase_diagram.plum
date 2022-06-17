@@ -1,0 +1,92 @@
+@startuml
+
+' Changed sytle
+skinparam actorStyle awesome
+skinparam backgroundColor #ffffff
+
+' Information for diagram
+title UseCase diagram for Cloud Storage App\n <b>Arbor File</b> \nby J.K aka s3rp3nt
+
+' direction setting
+left to right direction
+
+' Actor for the user
+actor "user" as user
+
+package "<i>MainActivity</i>" {
+
+/'
+usecase items for "manage data"
+manage data = md
+'/
+usecase "delete data" as md1dd
+usecase "upload data" as md2ud
+usecase "download data" as md3dd
+usecase "search item" as md6si
+usecase "rename item" as md7ri
+usecase "view image" as md8vi
+
+/'
+usecase items for "show information"
+show information = si
+'/
+usecase "view current storage capacity" as si1vs
+usecase "show option menu" as si2sm
+
+/'
+usecase for "add configuration"
+add configuration = ac
+'/
+usecase "add name" as ac1an
+
+/'
+usecase for "functions"
+add function = f
+'/
+usecase "hold item" as f1hi
+usecase "push button" as f2pb
+usecase "input keyboard"  as f3ik
+usecase "click item" as f4ci
+
+
+/'
+database = db
+'/
+database "files&folders" as db1ff
+}
+
+/'
+user interactions
+'/
+user --> md1dd
+user --> md2ud
+user --> md3dd
+user --> md6si
+user --> md7ri
+user --> md8vi
+user --> si1vs
+
+/'
+require usecase items
+'/
+md1dd ...> f1hi : requires function
+md2ud ...> f2pb : requires function
+md3dd ...> f1hi : requires function
+md7ri ...> f1hi : requires function
+md8vi ...> f4ci : requires function
+ac1an ..> f3ik : requires function
+si1vs ...> f2pb : requires function
+md6si ..> f3ik : requires function
+
+/'
+include usecase items
+'/
+f1hi ..> si2sm #blue;line.dotted;text:blue : include
+
+/'
+other references
+'/
+md6si <|---|> db1ff #orange;line.bold;text:orange : communicate
+md2ud ---> db1ff#orange;line.bold;text:orange : creates entry in
+
+@enduml

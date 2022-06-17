@@ -1,0 +1,72 @@
+@startuml
+
+' Information for diagram
+title State diagram for Cloud Storage App\n <b>Arbor File</b> \nby J.K aka s3rp3nt
+
+/'
+Main states for the app. User switches between these two states.
+'/
+Storage_State : User is located in the storage section. \nThe user is able to manipulate the Data and Items
+Diagram_State : User is located in the diagram section. \nThis section will upadte the capacity storage permanently
+
+Diagram_State --[dashed,#darkblue]-> Storage_State : User navigates
+Storage_State -[dashed,#darkblue]> Diagram_State : User navigates
+
+state Storage_State #DAF7A6 {
+    state Data_State {
+    ' section for state: "deleteData"
+    [*] --> deleteData
+    deleteData -[#black]-> [*] : aborted
+    deleteData --> dataDeleted
+    dataDeleted --> [*]
+    dataDeleted -[dashed,#red]-> Diagram_State : decrease value 
+
+    ' section for state: "uploadData"
+    [*] -down-> uploadData
+    uploadData -[#black]-> [*] : aborted
+    uploadData --> dataUploaded
+    dataUploaded --> [*]
+    dataUploaded -[dashed,#green]-> Diagram_State : increase value 
+    uploadData --> actionFailed : not enough storage
+    actionFailed --> [*]
+
+    ' section for state: "downloadData"
+    [*] --> downloadData
+    downloadData -[#black]-> [*] : aborted
+    downloadData --> dataDownloaded
+    dataDownloaded --> [*]
+
+    note "The synonym 'Data' includes: items/files and folders" as infoDATASYN
+    }
+
+
+    state Item_State {
+    ' section for state: "searchItem"
+    [*] --> searchItem
+    searchItem -[#black]-> [*] : aborted
+    searchItem --> showItem
+
+    ' section for state: "renameItem"
+    [*] --> renameItem
+    renameItem -[#black]-> [*] : aborted
+    renameItem --> itemRenamed
+    itemRenamed --> [*]
+
+    ' section for state: "viewImageItem"
+    [*] --> viewImageItem
+    viewImageItem --> imageFullscreen
+    imageFullscreen -[#black]-> [*] : aborted
+    }
+
+}
+
+state Diagram_State #lightblue {
+    ' section for state: "showInformation"
+    [*] --> showInformation
+    showInformation -[dotted,#gray]-> showInformation : displays information permanently 
+    showInformation : User sees the current storage capacity
+
+    note "The user can't do any interactions in this state" as infoDIASTATE
+}
+
+@enduml

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "506143122209",
+    "firebase_url": "https://cloudstorageapp-96b61-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "cloudstorageapp-96b61",
+    "storage_bucket": "cloudstorageapp-96b61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:506143122209:android:dbe2fe6f318740a3669460",
+        "android_client_info": {
+          "package_name": "ch.in21_25a.cloudstorageapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "506143122209-bmaa410gr4gcp24b9ibqr8mejmbqgv6v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA3WfaPbIjzQqiIaaVtkzk3akGm9AlY4gY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "506143122209-bmaa410gr4gcp24b9ibqr8mejmbqgv6v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

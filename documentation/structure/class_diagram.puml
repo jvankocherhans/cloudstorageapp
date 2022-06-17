@@ -1,0 +1,108 @@
+@startuml
+
+' Information for diagram
+title UseCase diagram for Cloud Storage App\n <b>Arbor File</b> \nby J.K aka s3rp3nt\n
+
+class StorageActivity {
+    - EXTRA_FILEURL : int
+    - PICK_FILE_REQUEST : int
+    - fileUri : fileUri
+    - filesize : inte
+    - searchView : SearchView
+    - storage : FirebaseStorage
+    - storageRef : StorageReference
+    - databaseRef : DatabaseReference
+    - dbListener : ValueEventListener
+    - recyclerView : RecyclerView
+    - fileAdapter : FileAdapter
+    - progressCircle : ProgressBar
+    - uploads : List<UploadFile>
+
+    # onCreate(Bundle savedInstanceState) : void
+    + onBackPressed() : void
+    + pushFiles(String inputSearch) : void
+    + showPopup(View v) : Void
+    + onMenuItemClick(MenuItem menuItem) : boolean
+    - openFileChooser() : void
+    # onActivityResult(int requestCode, int resultCode, Intent data) : void
+    + getUriFileName(Uri fileUri) : void
+    + getUriFileSizeKB(Uro fileUri) : void
+    - getFileExtension(Uri uri) : String
+    - uploadFile() : void
+    + onItemClick(int position) : void
+    + onRenameClick(int position) : void
+    + onDownloadClick(int position) : void
+    + onDeleteClick(int position) : void
+    + downloadFile(Context context, String fileName, String fileExtension, String destinationDirectory, String fileUrl) : void
+    + openDialog(int fileIndex, String fileExtension) : void
+    + applyFileName(String fileName, int position) : void
+    + onDestroy() : void
+}
+
+class StorageCapacityActivity {
+    - storage : FirebaseStorage
+    - storageRef : StorageReference
+    - databaseRef : DatabaseReference
+    - uploads : List<UploadFile>
+    - progressBarStorageUsage : ProgressBar
+    - currentUsageInPercentage : TextView
+    - getCurrentUsageInText : TextView
+    - STORAGECAPACITY_IN_GB : double
+
+    # onCreate(Bundle savedInstanceState) : void
+    + onBackPressed() : void
+    + calculateCapacity() : double
+    + onDestroy() : void
+}
+
+class StorageCapacityActivity {
+     # onCreate(Bundle savedInstanceState) : void
+     + backStorageActivity(View v) : void
+}
+
+class UploadFile {
+    - fileName : String
+    - fileExtension : String
+    - fileUrl : String
+    - fileSize : long
+    - key : String
+
+    + UploadFile()
+    + UploadFile(String fileName, String fileExtension, String fileUrl, int fileSize)
+    + getFileName() : String
+    + setFileName(String fileName) : void
+    + getFileExtension() : String
+    + setFilenExtension(String fileName) : void
+    + getFileUrl() : String
+    + setFileUrl(String fileName) : void
+    + getFileSize() : long
+    + setFileSize(long fileName) : void
+    + getKey() : String
+    + setKey(String fileName) : void
+}
+
+class FileAdapter {
+    - context : Context
+    - uploads : List<UploadFile>
+    - listener : OnItemClickListener
+
+    + FileAdapter(Context context, List<UploadFile> uploads) 
+    + onCreateViewHolder (ViewGroup parent, int viewType) : ItemViewHolder
+    + onBindViewHolder(ItemViewHolder holder, int position) : void
+    + getItemCount() : int
+    + setOnItemClickListener(OnItemClickListener listener) : void
+}
+
+class Dialog {
+    - editTextFilename : EditText
+    - listener : DialogListener
+    - fileIndex  : int
+    - fileExtension : String
+
+    + Dialog(int fileIndex, String fileExtension)
+    + onCreateDialog(Bundle savedInstanceState) : android.app.Dialog
+    + onAttach(Context contex) : void
+    + getFileIndex() : int
+}
+
+@enduml
